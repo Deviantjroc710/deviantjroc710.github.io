@@ -130,9 +130,46 @@ textarea { width:100%; font:inherit; padding:10px; border-radius:7px;
   border-radius:8px; padding:10px 14px; margin:0 0 12px; color:var(--good); }
 @media (max-width:520px) { .fb { right:10px; bottom:10px; } }
 
-/* Static export: anything needing a server is disabled, not hidden -- seeing
-   what the tool offers is part of the demo, pretending it works is not. */
-form.acts, form.search { opacity: .5; pointer-events: none; }
+/* Static export: the reply buttons need a server to POST to, so they are
+   disabled rather than hidden -- seeing what the tool offers is part of the
+   demo, pretending a button works is not. SEARCH IS NOT IN THIS LIST: it runs
+   client-side here, see _SEARCH_JS. */
+form.acts { opacity: .5; pointer-events: none; }
 .static-note { margin: 0 0 14px; padding: 10px 14px; border-radius: 8px;
   background: #24405c; color: #fff; font-size: 14px; }
-</style><p class="demo">DEMO — every brand, offer and figure below is invented. Nothing here is anyone's real mail.</p><p class="static-note">Static preview — the list, the ranking and the filters are live. Search and the reply buttons need the running app, so they are shown but disabled.</p><header><h1>Collabs</h1><div class="sub">0 to look at, best first. Nothing is ever sent from here — every reply ends up as a draft you send yourself.</div><form class="search" method="get" action="/"><input type="hidden" name="f" value="flagged"><input type="search" name="q" value="" placeholder="Search a brand, sender or subject" aria-label="Search"><button>Search</button></form><div class="filters"><a class="chip" href="index.html">Everything <span>10</span></a><a class="chip" href="f-ready.html">Ready to reply <span>10</span></a><a class="chip" href="f-money.html">Has a real offer <span>10</span></a><a class="chip on" href="f-flagged.html">Watch-out terms <span>0</span></a><a class="chip" href="f-unverified.html">Unverified sender <span>0</span></a></div><div class="filters filters-2"><a class="chip on" href="f-flagged.html">Any time <span>0</span></a><a class="chip" href="f-flagged-age-new.html">Last 7 days <span>0</span></a><a class="chip" href="f-flagged-age-old.html">Older than 7 days <span>0</span></a><a class="chip" href="f-flagged-talking.html">Already talking <span>0</span></a></div></header><main><p class="stale">A sync has never completed here — this list is not empty, it&#x27;s unfilled.</p><p class="empty">Nothing waiting. Run the morning sync if that looks wrong.</p></main>
+.no-hits { color: #8a5a00; font-weight: 600; margin: 12px 0; }
+</style><p class="demo">DEMO — every brand, offer and figure below is invented. Nothing here is anyone's real mail.</p><p class="static-note">Static preview — the list, the ranking, the filters and the search all work. Only the reply buttons need the running app, so they are shown but disabled.</p><header><h1>Collabs</h1><div class="sub">0 to look at, best first. Nothing is ever sent from here — every reply ends up as a draft you send yourself.</div><form class="search" method="get" action="/"><input type="hidden" name="f" value="flagged"><input type="search" name="q" value="" placeholder="Search a brand, sender or subject" aria-label="Search"><button>Search</button></form><div class="filters"><a class="chip" href="index.html">Everything <span>10</span></a><a class="chip" href="f-ready.html">Ready to reply <span>10</span></a><a class="chip" href="f-money.html">Has a real offer <span>10</span></a><a class="chip on" href="f-flagged.html">Watch-out terms <span>0</span></a><a class="chip" href="f-unverified.html">Unverified sender <span>0</span></a></div><div class="filters filters-2"><a class="chip on" href="f-flagged.html">Any time <span>0</span></a><a class="chip" href="f-flagged-age-new.html">Last 7 days <span>0</span></a><a class="chip" href="f-flagged-age-old.html">Older than 7 days <span>0</span></a><a class="chip" href="f-flagged-talking.html">Already talking <span>0</span></a></div></header><main><p class="stale">A sync has never completed here — this list is not empty, it&#x27;s unfilled.</p><p class="empty">Nothing waiting. Run the morning sync if that looks wrong.</p></main>
+<script>
+(function () {
+  var form = document.querySelector("form.search");
+  if (!form) return;
+  var input = form.querySelector("input[type=search]");
+  var cards = Array.prototype.slice.call(document.querySelectorAll("article.card"));
+  var main = document.querySelector("main");
+  var msg = document.createElement("p");
+  msg.className = "no-hits";
+  msg.hidden = true;
+  if (main) main.insertBefore(msg, main.firstChild);
+
+  function apply() {
+    var q = input.value.toLowerCase().trim();
+    var terms = q ? q.split(/\s+/) : [];
+    var shown = 0;
+    cards.forEach(function (card) {
+      var hay = (card.textContent || "").toLowerCase();
+      var hit = terms.every(function (t) { return hay.indexOf(t) !== -1; });
+      card.hidden = !hit;
+      if (hit) shown++;
+    });
+    if (terms.length && shown === 0) {
+      msg.textContent = "Nothing matches \u201c" + input.value + "\u201d.";
+      msg.hidden = false;
+    } else {
+      msg.hidden = true;
+    }
+  }
+  input.addEventListener("input", apply);
+  form.addEventListener("submit", function (e) { e.preventDefault(); apply(); });
+  apply();
+})();
+</script>
