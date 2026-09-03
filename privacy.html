@@ -1,0 +1,57 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collab-Sorter — Privacy Policy</title>
+<style>
+  body { max-width: 46rem; margin: 3rem auto; padding: 0 1.25rem;
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+         color: #1a1a1a; }
+  h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+  h2 { font-size: 1.1rem; margin-top: 2rem; }
+  .date { color: #666; font-size: .9rem; }
+  code { background: #f4f4f4; padding: .1rem .3rem; border-radius: 3px; }
+  @media (prefers-color-scheme: dark) {
+    body { background:#111; color:#eee; } code { background:#222; }
+    .date { color:#999; }
+  }
+</style>
+
+<h1>Collab-Sorter — Privacy Policy</h1>
+<p class="date">Last updated 3 September 2026</p>
+
+<p>Collab-Sorter is a private tool used by one person to triage collaboration
+offers in their own email inbox. It is not a product, it is not offered to the
+public, and it has no users other than its owner.</p>
+
+<h2>What it accesses</h2>
+<p>With the account holder's explicit Google consent, Collab-Sorter reads email
+using the <code>gmail.readonly</code> scope. That scope is read-only: the
+application cannot send, delete, or modify mail, and it does not request any
+scope that would allow it to.</p>
+
+<h2>Where the data goes</h2>
+<p>Email is fetched to a single personal computer and stored only on that
+machine. There is no server, no hosting provider, no database, and no account
+system. Nothing is uploaded to a website.</p>
+
+<p><strong>One third party is involved.</strong> To decide whether a message is
+a genuine collaboration offer or a scam, the text of candidate messages is sent
+to Anthropic's API for classification. Anthropic processes it to return that
+answer. No other third party receives message content, and the data is not sold,
+shared, or used for advertising by anyone.</p>
+
+<h2>What is kept, and for how long</h2>
+<p>The tool stores what it needs to rank offers: sender, subject, extracted
+figures, and its own verdicts. Message bodies are not retained after
+classification. Access tokens are encrypted at rest on the local machine.</p>
+
+<h2>Revoking access</h2>
+<p>The account holder can revoke Collab-Sorter's access at any time at
+<a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+Revoking stops all access immediately.</p>
+
+<h2>Contact</h2>
+<p>Questions about this policy, or a request about data:
+<a href="https://github.com/mankowkorp/mankowkorp.github.io/issues">open an
+issue on GitHub</a>. That is a public tracker, so please do not include
+anything private in it.</p>
