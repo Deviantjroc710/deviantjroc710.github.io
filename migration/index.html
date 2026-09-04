@@ -1,0 +1,71 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A migration with no undo — Derek Mankowski</title>
+<meta name="description" content="91,649 tickets moved against a deadline after which the source was gone. Verified zero lost.">
+<link rel="stylesheet" href="../style.css">
+
+<a class="back" href="../">&larr; Derek Mankowski</a>
+
+<h1>A migration with no undo</h1>
+<p class="standfirst">Moving a decade of support history between two systems, against
+a date after which the old one would be gone for good.</p>
+
+<div class="stats">
+  <div class="stat"><b>91,649</b><span>tickets</span></div>
+  <div class="stat"><b>254,574</b><span>comments</span></div>
+  <div class="stat"><b>~99,000</b><span>attachments</span></div>
+  <div class="stat"><b>31 GB</b><span>moved</span></div>
+  <div class="stat"><b class="hit">0</b><span>missing at verification</span></div>
+  <div class="stat"><b>1</b><span>deadline, immovable</span></div>
+</div>
+<p class="note">Systems, vendors and the organisation are deliberately unnamed.</p>
+
+<h2>The hard part wasn&rsquo;t the volume</h2>
+
+<p>It was that access to the source ended on a fixed date. After it, nothing could
+be re-fetched &mdash; not a missed ticket, not a corrupted attachment, not a batch
+that looked wrong on review.</p>
+
+<p>Every ordinary safety net assumes you can go back: re-pull the odd ones, run it
+again next week, compare later at your leisure. None of those existed here. That
+single constraint decided the whole design.</p>
+
+<h2>So everything had to be resumable</h2>
+
+<p>Extraction ran on cursors rather than offsets, checkpointed as it went, and could
+restart from where it stopped instead of from the beginning. A run that dies at
+hour thirty should cost thirty minutes, not thirty hours.</p>
+
+<h2>And checkpoints had to fail loudly</h2>
+
+<p>They didn&rsquo;t, at first. A long run once produced nothing usable because a
+checkpoint was written in one shape and read back in another. Nothing raised an
+error &mdash; it simply resumed from nowhere and carried on looking healthy.</p>
+
+<p>Checkpoints now carry a version and are validated when they are read, so a
+mismatch stops the run rather than silently emptying it. This is the whole of
+<em>a test that can&rsquo;t fail isn&rsquo;t evidence</em>, learned the expensive
+way: the run reported success the entire time it was doing nothing.</p>
+
+<h2>Then delta passes, until the gap closed</h2>
+
+<p>A single copy is stale the moment it finishes, because the source keeps
+accepting new work. So the bulk pass was followed by repeated delta passes over
+what had changed since the last cursor, each one smaller than the last, right up
+to the cutoff.</p>
+
+<h2>How we knew it worked</h2>
+
+<p><strong>The destination was reconciled against the source while the source could
+still answer.</strong> Not &ldquo;no errors were reported&rdquo; &mdash; an actual
+count of what should be there against what was, run before the door closed.</p>
+
+<p>Zero tickets missing. Which is the only version of this sentence worth writing
+down, because the alternative would have been permanent.</p>
+
+<footer>
+  <p>Client, vendors and internal systems are unnamed on purpose &mdash; the method
+  is mine to describe, the specifics aren&rsquo;t.<br>
+  <a href="../">More work</a></p>
+</footer>

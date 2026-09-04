@@ -1,0 +1,65 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Console-only," allegedly — Derek Mankowski</title>
+<meta name="description" content="Turning a click-through security review into a sweep anyone can re-run — including a list of what it cannot verify.">
+<link rel="stylesheet" href="../style.css">
+
+<a class="back" href="../">&larr; Derek Mankowski</a>
+
+<h1>&ldquo;Console-only,&rdquo; allegedly</h1>
+<p class="standfirst">A security review that existed only as somebody clicking
+through an admin console, turned into something anyone can run again next quarter.</p>
+
+<h2>A review you can&rsquo;t re-run is an anecdote</h2>
+
+<p>Someone opens a console, reads some screens, and writes down what they saw. Six
+months later the only artifact is that document, and there is no way to tell
+whether it is still true without repeating the whole ritual &mdash; assuming you
+still remember which screens, in which order, and what counted as correct.</p>
+
+<p>Worse, nobody can check the reviewer&rsquo;s work. A conclusion arrived at by
+looking is a conclusion nobody else can reproduce, which puts it somewhere between
+a measurement and a memory.</p>
+
+<h2>I was told three times it couldn&rsquo;t be scripted</h2>
+
+<p>It could. Most of it, anyway &mdash; which is the usual shape of that answer.
+&ldquo;Console-only&rdquo; almost always means nobody has needed it badly enough to
+find the interface, not that no interface exists.</p>
+
+<p>The part that genuinely was manual turned out to be small, and once it was
+isolated it could be written down precisely instead of hiding inside a much larger
+claim. That is a better outcome than either answer on its own: most of the review
+became repeatable, and the remainder became explicit.</p>
+
+<h2>Control cases, or it proves nothing</h2>
+
+<p>A sweep that reports &ldquo;no problems&rdquo; is worthless until you have
+watched it report a problem. So the checks run against known-good and known-bad
+inputs on every execution. If the case that is supposed to fail comes back clean,
+the sweep has broken and says so, rather than handing over a reassuring page of
+green.</p>
+
+<h2>The part most tools leave out</h2>
+
+<p><strong>The re-check tool prints what it could not verify.</strong> Not as a
+footnote &mdash; as a section, alongside the results, listing every question it was
+unable to answer and why.</p>
+
+<p>Coverage is the thing reviews quietly lie about. A tool that checks eleven of
+fifteen things and reports on eleven has told you the truth about each one and a
+lie about the whole. Naming the four is the difference between a report and a
+reassurance.</p>
+
+<h2>And a baseline with a date on it</h2>
+
+<p>Every run is stamped and kept, so the next one is a comparison rather than a
+fresh opinion. Drift becomes visible on its own, without anyone having to remember
+what last quarter looked like.</p>
+
+<footer>
+  <p>The findings themselves stay private &mdash; some describe things that are
+  still being fixed. The method is what&rsquo;s mine to write about.<br>
+  <a href="../">More work</a></p>
+</footer>

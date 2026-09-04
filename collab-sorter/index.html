@@ -1,0 +1,72 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collab-Sorter — a mail triage service</title>
+<meta name="description" content="A ranking tool for one creator's inbox: what it cost, what broke, and what running it taught.">
+<link rel="stylesheet" href="../style.css">
+
+<a class="back" href="../">← Derek Mankowski</a>
+
+<h1>A mail triage service</h1>
+<p class="standfirst">One creator gets around 350 collaboration pitches a week.
+This ranks the ones worth answering, refuses the fraud, and drafts the replies
+she asks for &mdash; without ever sending anything she hasn&rsquo;t read.</p>
+
+<p><strong>She uses it every day.</strong> Every five minutes it checks her
+mailbox, scores whatever arrived, and updates an interface she opens on her own
+machine: offers ranked by what they are actually worth, the money pulled out of
+each pitch, and the fraud held separately from the work. It has tracked 693 deals
+so far, and costs a few cents a message to run.</p>
+
+<h2>It cannot send mail</h2>
+
+<p>The tool holds read-only access to her mailbox and nothing wider &mdash; a
+limit enforced by Google, not by good intentions. It reads, ranks, and writes
+drafts. She sends.</p>
+
+<p>That was the harder path. The straightforward way to connect would have
+required the broadest mailbox permission Google issues, which grants the ability
+to send and delete as a side effect of wanting to read. Taking the narrow scope
+cost weeks and closed that door permanently. For a tool pointed at someone
+else&rsquo;s livelihood, that is the right trade every time.</p>
+
+<h2>Her mail stays on her side</h2>
+
+<p>It runs on a personal machine. No server, no hosting provider, no account
+system, no archive of her correspondence sitting somewhere waiting to be
+breached. Message bodies are not kept after they are scored, and access can be
+revoked by her, at any time, without asking anyone.
+<a href="../privacy.html">The privacy policy</a> says exactly what it touches.</p>
+
+<h2>Changes get measured against the whole inbox</h2>
+
+<p>When she declines an offer she writes why, and those reasons are the most
+valuable signal the system has. They are also biased: people only explain
+themselves when something annoys them, so the complaints overstate how common a
+problem really is.</p>
+
+<p>So a proposed ranking change gets measured against the full corpus before it
+ships, not against the pile of complaints that prompted it. Several ideas that
+looked obviously worth building turned out to move a handful of items out of
+hundreds. Knowing that in advance is the difference between a week spent well and
+a week spent politely.</p>
+
+<h2>It writes; she decides</h2>
+
+<p>For anything worth a response, it drafts a reply in her voice and puts it in
+front of her. Nothing goes out unread, nothing is scheduled, nothing is
+autonomous. The tool&rsquo;s job is to make the decision cheap, not to make it
+for her.</p>
+
+<hr>
+
+<h2>See it</h2>
+<p><a href="../demo/"><strong>The demo</strong></a> is the real
+interface running on invented offers &mdash; the ranking, the filters, the
+search. No one&rsquo;s actual mail appears in it, and none ever will.</p>
+
+<footer>
+  <p>It is called Collab-Sorter. The code is private and stays that way &mdash; it
+  runs against a real person&rsquo;s live mailbox.<br>
+  <a href="../privacy.html">Privacy policy</a> &middot; <a href="../">More work</a></p>
+</footer>

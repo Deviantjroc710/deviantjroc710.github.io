@@ -1,20 +1,68 @@
 <!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Collab-Sorter</title>
-<style>
-  body { max-width: 46rem; margin: 3rem auto; padding: 0 1.25rem;
-         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-         color: #1a1a1a; }
-  h1 { font-size: 1.6rem; }
-  @media (prefers-color-scheme: dark) { body { background:#111; color:#eee; } }
-</style>
+<title>Derek Mankowski</title>
+<meta name="description" content="Security engineering, and the things I build to prove they work.">
+<link rel="stylesheet" href="style.css">
 
-<h1>Collab-Sorter</h1>
-<p>A private tool that sorts collaboration offers in one person's email inbox,
-so the real ones are easy to find and the scams are not.</p>
-<p>It is not a product and is not available to the public. It reads one mailbox,
-read-only, with that account holder's consent, and runs on a personal computer.</p>
-<p><a href="demo/">See the demo</a> — the real interface, running on
-invented offers. No one's actual mail appears in it.</p>
-<p><a href="privacy.html">Privacy policy</a></p>
+<h1>Derek Mankowski</h1>
+<p class="tagline">I build things, then try to prove they don&rsquo;t work.</p>
+
+<h2>The method</h2>
+<ul class="lines">
+  <li>A test that can&rsquo;t fail isn&rsquo;t evidence.</li>
+  <li>A check I can&rsquo;t re-run is an anecdote.</li>
+  <li>A zero is usually a claim about your query, not about your data.</li>
+  <li>&ldquo;That&rsquo;s console-only&rdquo; usually means nobody has scripted it yet.</li>
+  <li>Complaints tell you what annoys people, not what&rsquo;s common. Measure the whole population.</li>
+  <li>Every conclusion gets a second reader whose only job is to break it.</li>
+  <li>If someone else can&rsquo;t reproduce it, it isn&rsquo;t finished.</li>
+</ul>
+
+<h2>During the day</h2>
+<p class="sub">Security engineering. Most of it I can&rsquo;t show you, which is more or
+less the job. These describe the method, never the specifics.</p>
+<div class="cards">
+  <a class="c" href="migration/">
+    <b>A migration with no undo</b>
+    <p>91,649 tickets and 254,574 comments moved against a deadline after which the
+    source was gone for good. Verified zero lost.</p>
+  </a>
+  <a class="c" href="guards/">
+    <b>Scans that reported clean because they couldn&rsquo;t run</b>
+    <p>Permission errors were being counted as zero findings. The tooling now fails
+    loudly, and its guards are tested by trying to break them.</p>
+  </a>
+  <a class="c" href="scripted-review/">
+    <b>&ldquo;Console-only,&rdquo; allegedly</b>
+    <p>Replaced a manual security review with a scripted sweep anyone can re-run
+    &mdash; one that also reports what it couldn&rsquo;t verify.</p>
+  </a>
+</div>
+
+<h2>At night</h2>
+<p class="sub">Smaller. Mine. Clickable.</p>
+<div class="cards">
+  <a class="c" href="collab-sorter/">
+    <b>A mail triage service</b>
+    <p>Ranks around 350 collaboration pitches a week for one person. Read-only by
+    design: it drafts, she sends. <span class="go">&rarr; live demo</span></p>
+  </a>
+  <a class="c" href="websites/">
+    <b>Websites, end to end</b>
+    <p>Site, mail, and local search presence. Built, launched, still maintained.</p>
+  </a>
+  <a class="c" href="verification/">
+    <b>Backup and verification</b>
+    <p>Where the first line up there came from &mdash; a verifier that passed for
+    months because its baseline was newer than what it checked.</p>
+  </a>
+</div>
+
+<p class="kicker">Most of what I know came from finding out which of my own checks
+were lying to me.</p>
+
+<footer>
+  <p>No analytics on this page. I&rsquo;d rather not know.<br>
+  <a href="privacy.html">Privacy policy</a> for the mail triage service.</p>
+</footer>

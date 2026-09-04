@@ -1,0 +1,67 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scans that reported clean because they couldn't run — Derek Mankowski</title>
+<meta name="description" content="Permission errors were being counted as zero findings. What it took to make the tooling fail loudly instead.">
+<link rel="stylesheet" href="../style.css">
+
+<a class="back" href="../">&larr; Derek Mankowski</a>
+
+<h1>Scans that reported clean because they couldn&rsquo;t run</h1>
+<p class="standfirst">A tool that finds and removes dangerous credentials, reporting
+nothing to remove &mdash; because it was never allowed to look.</p>
+
+<div class="stats">
+  <div class="stat"><b class="hit">3</b><span>confident wrong answers before anyone noticed</span></div>
+  <div class="stat"><b>9</b><span>violations the new guards caught immediately</span></div>
+  <div class="stat"><b>8 / 8</b><span>deliberate sabotages the tests caught</span></div>
+</div>
+<p class="note">Systems, vendors and the organisation are deliberately unnamed.</p>
+
+<h2>An empty result and a refusal look identical</h2>
+
+<p>Ask an API for a list of things you are not permitted to see, and it does not
+hand you an error you can trip over. It hands you a shrug. One layer downstream,
+that shrug has become an empty list, and an empty list means <em>good news</em>.</p>
+
+<p>So the report said zero. It said zero three separate times, to people who had
+every reason to believe it, about a class of credential that very much existed.
+Nothing was broken in any way a passing run would reveal &mdash; the scan was
+working perfectly, on nothing at all.</p>
+
+<h2>The first rule: refuse to be reassuring</h2>
+
+<p>A check that cannot run must never render as a clean result. Permission failures
+now stop the run and say so by name, rather than flowing downstream to be counted
+as an absence of findings. &ldquo;I couldn&rsquo;t look&rdquo; and &ldquo;I looked
+and there was nothing&rdquo; are different sentences, and only one of them is
+evidence.</p>
+
+<p>The guards went in before the destructive half of the tool was allowed to run at
+all. On their first execution they caught nine violations in scripts that had been
+considered finished.</p>
+
+<h2>Then: test the tests, by breaking the code</h2>
+
+<p>A green suite proves the tests ran. It does not prove they would have noticed
+anything. The only honest way to find out is to damage the code deliberately and
+check that the suite screams.</p>
+
+<p>Eight sabotages went in, one at a time, each a plausible mistake a tired person
+would make. The suite caught eight of eight. Getting there took the assertions from
+around twenty-two to forty-one &mdash; and most of those additions exist because a
+sabotage walked straight past the originals.</p>
+
+<h2>What it is now</h2>
+
+<p>The repository gained its first continuous integration in the same change:
+automated guards, plus a runner that executes the whole fixture suite on every
+push. The tooling is still capable of deleting things. It is now considerably
+harder for it to delete the wrong things quietly, or to tell you it found nothing
+when it was never permitted to look.</p>
+
+<footer>
+  <p>Client, vendors and internal systems are unnamed on purpose &mdash; the method
+  is mine to describe, the specifics aren&rsquo;t.<br>
+  <a href="../">More work</a></p>
+</footer>

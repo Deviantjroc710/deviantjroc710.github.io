@@ -1,0 +1,63 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backup and verification — Derek Mankowski</title>
+<meta name="description" content="The check passed for months. It was comparing the files against a copy of themselves, made seconds earlier.">
+<link rel="stylesheet" href="../style.css">
+
+<a class="back" href="../">&larr; Derek Mankowski</a>
+
+<h1>Backup and verification</h1>
+<p class="standfirst">The check passed every time. It was comparing the files
+against a copy of themselves, made seconds earlier.</p>
+
+<h2>How a check ends up unable to fail</h2>
+
+<p>The verifier compared the current tree against a baseline. The baseline was
+built as part of the same run. So a passing result meant the files matched a
+snapshot of those files taken moments before &mdash; which they always would,
+whatever had happened to them, however much had gone missing the week before.</p>
+
+<p>Nothing about the output looked wrong. It printed a real comparison over real
+paths and returned a real, honest PASS. It just had no capacity to return anything
+else, which makes it decoration rather than a check.</p>
+
+<h2>Why this is easy to build and hard to notice</h2>
+
+<p>Whoever writes the fix usually writes the test for it, and does so with the fix
+fresh in mind &mdash; so the check ends up scoped to precisely what the fix
+touched. Both halves work exactly as intended. The gap only exists between them.</p>
+
+<p>The tells are quiet ones. A baseline timestamped seconds before the run it
+validates. An expected-failures list that suddenly matches nothing. A verified
+scope that is identical to the set of files just rewritten.</p>
+
+<h2>The fix: a reference older than the thing it checks</h2>
+
+<p>The baseline is now rebuilt from version history at a known earlier point, about
+nineteen hours before the tree it compares against. That single property &mdash;
+the reference predates the subject &mdash; is what makes the result mean anything.</p>
+
+<p>The verifier prints the baseline&rsquo;s identity and age before it runs, and
+asserts the baseline is older than the tree. If it isn&rsquo;t, it refuses rather
+than passing.</p>
+
+<h2>It now fails, and that&rsquo;s the point</h2>
+
+<p><strong>The current run reports two files missing and twenty-nine changed.</strong>
+Every one is accounted for in writing, because the baseline predates a day of
+deliberate work and those are exactly the files that day touched.</p>
+
+<p>A FAIL that can be explained line by line is worth more than a PASS that could
+never have been anything else. The value of the check is not the result &mdash;
+it&rsquo;s that the result was in doubt.</p>
+
+<h2>What it&rsquo;s guarding</h2>
+
+<p>An automated backup that runs unattended and reports failures loudly, covering
+everything that would be painful to lose across a few machines. A restore has been
+rehearsed, because a backup nobody has restored from is a hypothesis.</p>
+
+<footer>
+  <p><a href="../">More work</a></p>
+</footer>
