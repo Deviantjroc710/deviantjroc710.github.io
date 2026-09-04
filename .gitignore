@@ -1,0 +1,7 @@
+# Agent-local state — never belongs in a public repo.
+# Anchored at any depth: a pattern containing "/" is otherwise root-relative.
+**/.claude/settings.local.json
+**/.claude/settings.local.json.bak
+
+# macOS
+.DS_Store
