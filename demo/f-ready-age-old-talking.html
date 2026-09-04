@@ -124,9 +124,15 @@ textarea { width:100%; font:inherit; padding:10px; border-radius:7px;
   border-top:none; border-radius:0 8px 8px 8px; padding:12px 14px;
   box-shadow:0 3px 14px rgba(0,0,0,.28); }
 .fb p { margin:0 0 8px; font-size:13px; color:var(--dim); }
-.rankfb { margin:10px 0 0; display:flex; gap:8px; align-items:center;
-  flex-wrap:wrap; }
-.rankfb span { color:var(--dim); font-size:13px; }
+.rankfb { margin:10px 0 0; flex-basis:100%; }
+.rankfb > summary { color:var(--dim); font-size:13px; cursor:pointer;
+  display:inline-block; }
+.rankrow { display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+  margin-top:8px; }
+.rankrow span { color:var(--dim); font-size:13px; flex:1 1 200px; }
+.noted { background:var(--card); border:1px solid var(--good);
+  border-radius:8px; padding:9px 12px; margin:10px 0 0; color:var(--good);
+  font-size:14px; }
 .starform { display:inline; margin:0; }
 .star { background:none; border:0; padding:0 2px; cursor:pointer;
   font-size:17px; line-height:1; color:var(--dim); }
