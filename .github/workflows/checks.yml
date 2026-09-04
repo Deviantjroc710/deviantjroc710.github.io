@@ -72,7 +72,8 @@ jobs:
           fi
           fail=0
           while IFS= read -r term; do
-            [ -z "$term" ] && continue
+            term="${term%$'\r'}"                  # tolerate CRLF from an editor
+            case "$term" in ''|'#'*) continue;; esac  # blanks and comments
             if xargs grep -aliF -- "$term" < /tmp/pages.txt 2>/dev/null | grep -q .; then
               echo "::error::a denylisted term appears in a published page"
               xargs grep -aliF -- "$term" < /tmp/pages.txt | sed 's/^/  /'

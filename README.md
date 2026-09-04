@@ -47,8 +47,11 @@ style preferences:
    any file, including this one.
 5. **No code from private repositories.**
 
-Rule 2 is the one that gets broken by accident, because each fact seems
-harmless on its own.
+Rule 2 is the one that most often gets broken by accident, because every part of
+it seems harmless on its own — an industry, a region, a job title, a team size.
+None of them identifies anyone alone; the combination identifies an organisation
+that never agreed to be named. Nothing here has broken it, and keeping that true
+is the entire point of scanning before every push.
 
 ## Making a change
 
