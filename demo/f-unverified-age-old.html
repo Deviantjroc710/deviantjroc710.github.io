@@ -40,6 +40,9 @@ a { color:var(--accent); }
 .empty { color:var(--dim); padding:30px 0; }
 .acts { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;
   align-items:center; }
+/* Visual order, against a DOM order that exists for the Enter key. */
+.reason { order:8; }
+.savenote { order:9; }
 .reason { flex:1 1 240px; min-width:180px; font:inherit; padding:7px 10px;
   border-radius:7px; border:1px dashed var(--line); background:transparent;
   color:var(--ink); }
