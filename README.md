@@ -62,6 +62,13 @@ is the entire point of scanning before every push.
 3. Check nothing from *The rules* leaked. Scan across every page at once,
    and include a control pattern that you know is present — a scan that reads
    nothing prints exactly the same output as a scan that finds nothing.
+   **Test any new pattern against the pages as they actually are, not against
+   examples you invent.** The e-mail check was written and tested against
+   made-up addresses; on its first real run it flagged all ten of the demo's
+   RFC 2606 addresses, because the generator puts the reserved name in the TLD
+   (`hello@x.test`) and the exclusion only handled it as a domain
+   (`@example.com`). A guard tested on data its author made up is tested
+   against the author's assumptions.
 4. Verify locally: `python3 -m http.server`, then confirm every link returns
    200 before pushing.
 
