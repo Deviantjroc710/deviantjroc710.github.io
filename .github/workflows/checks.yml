@@ -51,9 +51,17 @@ jobs:
           # Live e-mail addresses. grep -E has no lookahead, so RFC 2606
           # reserved domains are subtracted afterwards rather than excluded
           # inside the pattern.
+          #
+          # THE EXCLUSION MUST COVER RESERVED TLDs, NOT JUST RESERVED DOMAINS.
+          # The demo generator emits "hello@aurelia-home.test" -- the reserved
+          # name is the TLD, at the END. An earlier version matched only
+          # "@(example|test|invalid)\." which requires a trailing dot, so it
+          # caught "@example.com" and missed every address the generator
+          # actually produces: all 10 were flagged on the first demo publish
+          # after this job went live.
           check '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' \
                 'an e-mail address reached a public page' \
-                '@(example|test|invalid)\.'
+                '(\.(test|example|invalid|localhost)|@example\.(com|net|org))$'
           check '(gh[pousr]_[A-Za-z0-9]{16,}|xox[baprs]-[A-Za-z0-9-]{10,}|AKIA[0-9A-Z]{16})' \
                 'something shaped like a credential reached a public page' ''
           [ "$fail" = 0 ] && echo "generic scan clean"
